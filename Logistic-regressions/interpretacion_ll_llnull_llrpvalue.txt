@@ -1,0 +1,62 @@
+💯 Exactamente, Christian — lo entendiste perfecto.
+
+Ese es el orden lógico para interpretar el ajuste general de una
+regresión logística con sm.Logit.
+Te lo resumo paso a paso para que te quede como guía mental 👇
+
+------------------------------------------------------------------------
+
+🧭 1️⃣ Revisa el Log-Likelihood (LL) vs LL-Null
+
+-   LL (Log-Likelihood) → indica qué tan bien se ajusta tu modelo con
+    las variables.
+-   LL-Null → indica qué tan bien se ajusta el modelo sin variables
+    (solo la constante).
+
+🔹 Interpretación básica: > Si LL es mayor (menos negativo) que LL-Null,
+significa que tu modelo mejora la predicción respecto al modelo vacío.
+
+👉 Ejemplo:
+
+    LL-Null = -150
+    LL      = -120
+
+➡️ El modelo con variables explica mejor los datos (−120 > −150).
+
+------------------------------------------------------------------------
+
+🧭 2️⃣ Comprueba la prueba LLR (Likelihood Ratio Test)
+
+-   Esta prueba compara formalmente ambos modelos (el completo vs el
+    nulo).
+-   El resultado es el LLR p-value.
+
+🔹 Interpretación del LLR p-value: - Si p < 0.05, la mejora al incluir
+las variables es estadísticamente significativa.
+👉 Tu modelo con features realmente aporta información útil.
+- Si p > 0.05, las variables no mejoran significativamente el poder
+explicativo.
+
+------------------------------------------------------------------------
+
+🧩 En resumen visual:
+
+  ---------------------------------------------------------------------------
+  Indicador     Qué mide        Interpretación esperada para buen modelo
+  ------------- --------------- ---------------------------------------------
+  LL-Null       Modelo sin      Base de comparación
+                variables       
+
+  LL            Modelo con      Debe ser > LL-Null (menos negativo)
+                variables       
+
+  LLR p-value   Significancia   < 0.05 indica mejora significativa
+                de la mejora    
+  ---------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+Si lo quisieras pensar en lenguaje “cotidiano”: > Primero verificas que
+tu modelo predice mejor que el azar,
+> y luego confirmas estadísticamente que esa mejora no es por
+casualidad.
